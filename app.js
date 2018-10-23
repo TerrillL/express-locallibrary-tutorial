@@ -12,6 +12,7 @@ var helmet = require('helmet');
 
 var app = express();
 
+app.use(helmet());
 //Set up mongoose connection
 var mongoose = require('mongoose');
 var mongoDB = process.env.MONGODB_URI || 'mongodb://locallibrary:tpsl1156743@ds149672.mlab.com:49672/local_library_tl';
@@ -28,6 +29,9 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(compression());
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);

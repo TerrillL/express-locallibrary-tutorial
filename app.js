@@ -7,12 +7,14 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var catalogRouter = require('./routes/catalog');  //Import routes for "catalog" area of site
+var compression = require('compression');
+var helmet = require('helmet');
 
 var app = express();
 
 //Set up mongoose connection
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb://locallibrary:tpsl1156743@ds149672.mlab.com:49672/local_library_tl';
+var mongoDB = process.env.MONGODB_URI || 'mongodb://locallibrary:tpsl1156743@ds149672.mlab.com:49672/local_library_tl';
 mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
